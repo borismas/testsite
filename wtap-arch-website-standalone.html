@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>wtap@arch — zsh</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#0d0d0d}
+body{color:#c0c0c0;font-family:"Courier New",Courier,monospace;font-size:13px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#0d0d0d}::-webkit-scrollbar-thumb{background:#1f6b0a}
+.top{position:fixed;top:0;left:0;right:0;height:32px;background:#111;border-bottom:1px solid #1c1c1c;display:flex;align-items:center;z-index:10}
+.dots{display:flex;gap:6px;padding:0 14px;border-right:1px solid #1c1c1c;height:100%;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%}.r{background:#ff5f57}.y{background:#febc2e}.g{background:#28c840}
+.title{flex:1;text-align:center;font-size:11px;color:#444}.title b{color:#2aaa00;font-weight:400}
+nav{display:flex;height:100%}nav button{background:transparent;color:#444;border:0;border-left:1px solid #1c1c1c;padding:0 14px;font:11px "Courier New";cursor:pointer}
+nav button.active{background:#161616;color:#39ff14}
+.content{margin-top:32px;margin-bottom:22px;padding:24px 32px;max-width:760px}
+.block{background:#111;border:1px solid #1c1c1c;padding:14px 16px;margin-bottom:14px}
+.prompt{font-size:12px;margin-bottom:10px;color:#666}
+.prompt .u{color:#39ff14}.prompt .host{color:#5fafff}.prompt .path{color:#2aaa00}
+pre{color:#5fafff;font-size:10px;line-height:1.15;white-space:pre;margin:0 0 16px;text-shadow:0 0 6px rgba(95,175,255,.2)}
+.kv{font-size:12px;margin-bottom:2px}.k{color:#666;display:inline-block;min-width:110px}.green{color:#39ff14}.cyan{color:#5fafff}.yellow{color:#e0d060}.dim{color:#666}
+.out{font-size:12px;line-height:1.8;color:#c0c0c0}.out p{margin-bottom:0}
+.bar{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:12px}.barname{min-width:150px}.filled{color:#1f6b0a;letter-spacing:1px}.empty{color:#161616;letter-spacing:1px}.pct{color:#444}
+.tags{margin-top:6px}.tag{font-size:10px;color:#666;border:1px solid #1c1c1c;padding:1px 6px;margin-right:5px;display:inline-block}
+.proj{border-left:1px solid #1f6b0a;padding-left:14px;margin-bottom:20px}.proj h3{color:#39ff14;font-size:13px;display:inline}.proj .lang{color:#e0d060;font-size:11px;margin-left:10px}.proj a{color:#5fafff;font-size:11px;float:right;text-decoration:none}.proj p{font-size:12px;line-height:1.7;margin-top:4px}
+.div{border-top:1px solid #1c1c1c;margin:18px 0}
+.status{position:fixed;bottom:0;left:0;right:0;height:22px;background:#111;border-top:1px solid #1c1c1c;display:flex;align-items:center;padding:0 14px;font-size:11px;color:#444;gap:16px}
+@media(max-width:700px){.content{padding:18px 14px}nav button{padding:0 7px;font-size:10px}.title{display:none}pre{font-size:8px}.barname{min-width:125px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><div class="title"><b>wtap</b>@arch — zsh</div><nav id="nav"></nav></div>
+<main class="content" id="app"></main>
+<div class="status"><span class="green">●</span><span id="statusPage">home</span><span>|</span><span>wtap@arch</span><span>|</span><span id="clock"></span></div>
+<script>
+const C={green:"green",cyan:"cyan",yellow:"yellow",dim:"dim"};
+function block(cmd,body,path){return `<section class="block"><div class="prompt"><span class="u">wtap</span><span>@</span><span class="host">arch</span><span>:</span><span class="path">${path||"~"}</span><span> % </span><span>${cmd}</span></div>${body}</section>`}
+const logo=`      /\\\\
+     /  \\\\
+    / /\\\\ \\\\
+   / /  \\\\ \\\\
+  /_/    \\\\_\\\\
+  \\\\ \\\\    / /
+   \\\\ \\\\/ /
+    \\\\  /
+     \\\\/`;
+function kv(k,v,c=""){return `<div class="kv"><span class="k">${k}</span><span class="${c}">${v}</span></div>`}
+function home(){return block("neofetch",`<pre>${logo}</pre>${kv("user","wtap","green")}${kv("host","arch","cyan")}${kv("os","Arch Linux x86_64","cyan")}${kv("kernel","Linux x86_64")}${kv("shell","zsh 5.9")}${kv("editor","neovim")}${kv("role","software developer","yellow")}${kv("github","github.com/borismas","cyan")}${kv("status","building")}`)+block("cat README.md",`<div class="out"><p>i'm <span class="green">wtap</span>. i write software.</p><p class="dim">use the tabs above to look around.</p><p><span class="dim">% </span><span class="green">█</span></p></div>`)}
+function about(){let bars=[["bash / shell",88],["python",85],["javascript / ts",80],["linux / sysadmin",82],["git",90],["rust",60],["networking / ctf",72],["reading docs first",14]];return block("cat whoami.txt",kv("name","wtap","green")+kv("role","software developer")+kv("os","arch linux (btw)","cyan")+kv("github","github.com/borismas","cyan")+kv("discord","wtap.com"))+block("cat bio.txt",`<div class="out"><p>software developer. i build tools that solve problems i have, and occasionally ones other people have too.</p><p>i spend most of my time in the terminal, learning things the hard way, and writing code that works well enough. i run arch, use neovim, and have opinions about both.</p></div>`)+`<div class="div"></div>`+block("cat skills.txt",bars.map(([n,p])=>`<div class="bar"><span class="barname">${n}</span><span class="filled">${"█".repeat(Math.round(p/5))}</span><span class="empty">${"░".repeat(20-Math.round(p/5))}</span><span class="pct">${p}%</span></div>`).join(""))}
+function hobbies(){return block("ls",`<div class="out"><span class="cyan">coding</span>&nbsp;&nbsp;<span class="cyan">hacking</span>&nbsp;&nbsp;<span class="cyan">tinkering</span></div>`)+["coding","hacking","tinkering"].map((x,i)=>block("cat info.txt",`<div class="out"><p class="green">${x}${i===1?" / ctf":""}</p>${(i===0?["building personal tools and scripts","open source contributions","exploring new languages — currently rust","automating anything that feels repetitive"]:i===1?["ctf competitions and wargames","penetration testing mindset","reverse engineering binaries","recon and enumeration tooling"]:["home lab setup and maintenance","self-hosting services","messing with hardware","building things that break, fixing them"]).map(v=>`<p>&nbsp;&nbsp;› ${v}</p>`).join("")}</div>`,`~/hobbies/${x}`)).join("")}
+function projects(){let ps=[["shadow-map","python","lightweight network recon tool for ctf environments and home lab use. fast host discovery, service fingerprinting, clean markdown output.",["recon","networking","ctf","python"]],["exploit-kit","bash / python","personal ctf toolkit — exploit templates, payload generators, metadata scraper. zero to attacking on a fresh arch install in under 2 minutes.",["ctf","exploit-dev","bash","python"]],["loot-tracker","rust","cli tool for tracking tasks and notes with a dead-simple interface. started as a rust learning project, ended up being something i actually use every day.",["cli","rust","productivity"]]];return block("ls -t",`<div class="out"><span class="cyan">shadow-map</span>&nbsp;&nbsp;<span class="cyan">exploit-kit</span>&nbsp;&nbsp;<span class="cyan">loot-tracker</span></div>`)+block("cat README.md",ps.map(p=>`<article class="proj"><h3>${p[0]}</h3><span class="lang">${p[1]}</span><a href="https://github.com/borismas" target="_blank">github.com/borismas</a><p>${p[2]}</p><div class="tags">${p[3].map(t=>`<span class="tag">${t}</span>`).join("")}</div></article>`).join(""))+block("git log --oneline -5",`<div class="out">${[["a3f91bc","fix: shadow-map ipv6 without crashing"],["77d002e","feat: exploit-kit payload fuzzer v2"],["9c1aab7","chore: remove line that printed creds to stdout"],["441ffb3","feat: loot-tracker persistent storage"],["0000001","initial commit — works on my machine"]].map(x=>`<p><span class="yellow">${x[0]} </span>${x[1]}</p>`).join("")}`)}
+function contact(){return block("cat contact.cfg",`<div class="out"><p class="dim"># wtap — contact</p><p><span class="k">email</span><a class="green" href="mailto:contact.wtap@gmail.com">contact.wtap@gmail.com</a></p><p><span class="k">github</span><a class="green" href="https://github.com/borismas" target="_blank">github.com/borismas</a></p><p><span class="k">discord</span><span class="green">wtap.com</span></p></div>`)+block("cat notes.txt",`<div class="out"><p><span class="cyan">›</span> discord is fastest</p><p><span class="cyan">›</span> open to collabs, ctf teams, interesting projects</p><p class="dim">› not interested in crypto pitches or java jobs</p></div>`)}
+const pages={home:["home",home],about:["about",about],hobbies:["hobbies",hobbies],projects:["projects",projects],contact:["contact",contact]};
+function render(p){document.getElementById("app").innerHTML=pages[p][1]();document.getElementById("statusPage").textContent=p;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.p===p));history.replaceState(null,"","#"+p)}
+document.getElementById("nav").innerHTML=Object.keys(pages).map(p=>`<button data-p="${p}">${p}</button>`).join("");
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>render(b.dataset.p));
+function tick(){document.getElementById("clock").textContent=new Date().toTimeString().slice(0,8)} tick();setInterval(tick,1000);
+render(location.hash.slice(1) in pages?location.hash.slice(1):"home");
+</script>
+</body>
+</html>
