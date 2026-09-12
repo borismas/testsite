@@ -236,9 +236,9 @@ function hobbies(){
 
 function projects(){
   const ps=[
-    ["shadow-map","python","lightweight network recon tool for ctf environments and home lab use. fast host discovery, service fingerprinting, clean markdown output.",["recon","networking","ctf","python"]],
-    ["exploit-kit","bash / python","personal ctf toolkit — exploit templates, payload generators, metadata scraper. zero to attacking on a fresh arch install in under 2 minutes.",["ctf","exploit-dev","bash","python"]],
-    ["loot-tracker","rust","cli tool for tracking tasks and notes with a dead-simple interface. started as a rust learning project, ended up being something i actually use every day.",["cli","rust","productivity"]]
+    ["claymores-website","HTML","first website i posted on github, made for a friend",["commision","project","html","website"]],
+    ["RAT","python","Personal RAT (remote acces trojan) This is not posted public so people can't use it for malicious intent (hmu if u want it tho lmao) ",["pentesting","exploit-dev","python","rat"]],
+    ["this website!","html / java","The website you are looking at right now, my latest project as of 9/13/26",["website","html","hobby"]]
   ];
   const logs=[["a3f91bc","fix: shadow-map ipv6 without crashing"],["77d002e","feat: exploit-kit payload fuzzer v2"],["9c1aab7","chore: remove line that printed creds to stdout"],["441ffb3","feat: loot-tracker persistent storage"],["0000001","initial commit — works on my machine"]];
   return block("ls -t",`<div class="out"><span class="cyan">shadow-map</span>&nbsp;&nbsp; <span class="cyan">exploit-kit</span>&nbsp;&nbsp; <span class="cyan">loot-tracker</span></div>`) +
