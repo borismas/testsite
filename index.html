@@ -37,21 +37,25 @@ pre{color:#5fafff;font-size:10px;line-height:1.15;white-space:pre;margin:0 0 16p
 <script>
 const C={green:"green",cyan:"cyan",yellow:"yellow",dim:"dim"};
 function block(cmd,body,path){return `<section class="block"><div class="prompt"><span class="u">wtap</span><span>@</span><span class="host">arch</span><span>:</span><span class="path">${path||"~"}</span><span> % </span><span>${cmd}</span></div>${body}</section>`}
-const logo=`                     -@                
-                   .##@               
-                  .####@              
-                  @#####@             
-                . *######@            
-               .##@o@#####@           
-              /############@          
-             /##############@         
-            @######@**%######@        
-           @######`     %#####o       
-          @######@       ######%      
-        -@#######h       ######@.`    
-       /#####h**``       `**%@####@   
-      @H@*`                    `*%#@  
-     *`                            `* 
+const logo=`\e[34m                  ▄
+                 ▄█▄
+                ▄███▄
+               ▄█████▄
+              ▄███████▄
+             ▄ ▀▀██████▄
+            ▄██▄▄ ▀█████▄
+           ▄█████████████▄
+          ▄███████████████▄
+         ▄█████████████████▄
+        ▄███████████████████▄
+       ▄█████████▀▀▀▀████████▄
+      ▄████████▀      ▀███████▄
+     ▄█████████        ████▀▀██▄
+    ▄██████████        █████▄▄▄
+   ▄██████████▀        ▀█████████▄
+  ▄██████▀▀▀              ▀▀██████▄
+ ▄███▀▀                       ▀▀███▄
+▄▀▀                               ▀▀▄\e[0m  
 `;
 function kv(k,v,c=""){return `<div class="kv"><span class="k">${k}</span><span class="${c}">${v}</span></div>`}
 function home(){return block("neofetch",`<pre>${logo}</pre>${kv("user","wtap","green")}${kv("host","arch","cyan")}${kv("os","Arch Linux x86_64","cyan")}${kv("kernel","Linux x86_64")}${kv("shell","zsh 5.9")}${kv("editor","neovim")}${kv("role","software developer","yellow")}${kv("github","github.com/borismas","cyan")}${kv("status","building")}`)+block("cat README.md",`<div class="out"><p>i'm <span class="green">wtap</span>. i write software.</p><p class="dim">use the tabs above to look around.</p><p><span class="dim">% </span><span class="green">█</span></p></div>`)}
