@@ -37,15 +37,25 @@ pre{color:#5fafff;font-size:10px;line-height:1.15;white-space:pre;margin:0 0 16p
 <script>
 const C={green:"green",cyan:"cyan",yellow:"yellow",dim:"dim"};
 function block(cmd,body,path){return `<section class="block"><div class="prompt"><span class="u">wtap</span><span>@</span><span class="host">arch</span><span>:</span><span class="path">${path||"~"}</span><span> % </span><span>${cmd}</span></div>${body}</section>`}
-const logo=`      /\\\\
-     /  \\\\
-    / /\\\\ \\\\
-   / /  \\\\ \\\\
-  /_/    \\\\_\\\\
-  \\\\ \\\\    / /
-   \\\\ \\\\/ /
-    \\\\  /
-     \\\\/`;
+const logo=`                   -`
+                  .o+`
+                 `ooo/
+                `+oooo:
+               `+oooooo:
+               -+oooooo+:
+             `/:-:++oooo+:
+            `/++++/+++++++:
+           `/++++++++++++++:
+          `/+++ooooooooooooo/`
+         ./ooosssso++osssssso+`
+        .oossssso-````/ossssss+`
+       -osssssso.      :ssssssso.
+      :osssssss/        osssso+++.
+     /ossssssss/        +ssssooo/-
+   `/ossssso+/:-        -:/+osssso+-
+  `+sso+:-`                 `.-/+oso:
+ `++:.                           `-/+/
+ .`                                 ``;
 function kv(k,v,c=""){return `<div class="kv"><span class="k">${k}</span><span class="${c}">${v}</span></div>`}
 function home(){return block("neofetch",`<pre>${logo}</pre>${kv("user","wtap","green")}${kv("host","arch","cyan")}${kv("os","Arch Linux x86_64","cyan")}${kv("kernel","Linux x86_64")}${kv("shell","zsh 5.9")}${kv("editor","neovim")}${kv("role","software developer","yellow")}${kv("github","github.com/borismas","cyan")}${kv("status","building")}`)+block("cat README.md",`<div class="out"><p>i'm <span class="green">wtap</span>. i write software.</p><p class="dim">use the tabs above to look around.</p><p><span class="dim">% </span><span class="green">█</span></p></div>`)}
 function about(){let bars=[["bash / shell",88],["python",85],["javascript / ts",80],["linux / sysadmin",82],["git",90],["rust",60],["networking / ctf",72],["reading docs first",14]];return block("cat whoami.txt",kv("name","wtap","green")+kv("role","software developer")+kv("os","arch linux (btw)","cyan")+kv("github","github.com/borismas","cyan")+kv("discord","wtap.com"))+block("cat bio.txt",`<div class="out"><p>software developer. i build tools that solve problems i have, and occasionally ones other people have too.</p><p>i spend most of my time in the terminal, learning things the hard way, and writing code that works well enough. i run arch, use neovim, and have opinions about both.</p></div>`)+`<div class="div"></div>`+block("cat skills.txt",bars.map(([n,p])=>`<div class="bar"><span class="barname">${n}</span><span class="filled">${"█".repeat(Math.round(p/5))}</span><span class="empty">${"░".repeat(20-Math.round(p/5))}</span><span class="pct">${p}%</span></div>`).join(""))}
